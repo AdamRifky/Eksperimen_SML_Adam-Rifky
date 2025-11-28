@@ -73,7 +73,7 @@ def preprocess_data(df):
     df[numeric] = scaler.fit_transform(df[numeric])
 
     # Joblib
-    output_folder = 'DatasetAirlinePassengerSatisfaction_preprocessing'
+    output_folder = 'preprocessing/DatasetAirlinePassengerSatisfaction_preprocessing'
     os.makedirs(output_folder, exist_ok=True)
 
     # Save scaler and encoders
@@ -94,7 +94,7 @@ def save_data(df):
     )
     
     # Output folder
-    output_folder = 'DatasetAirlinePassengerSatisfaction_preprocessing'
+    output_folder = 'preprocessing/DatasetAirlinePassengerSatisfaction_preprocessing'
     os.makedirs(output_folder, exist_ok=True)
 
     train_path = os.path.join(output_folder, 'data_train.csv')
