@@ -1,0 +1,45 @@
+name: Auto_Preprocessing
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
+    steps:
+      # 1. Checkout Repository
+      - uses: actions/checkout@v3
+
+      # 2. Setup Python
+      - name: Set up Python 3.12.7
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12.7"
+
+      # 3. Install Libraries
+      - name: Install libraries
+        run: |
+          pip install pandas numpy scikit-learn joblib
+
+      # 4. Run Preprocessing
+      - name: Run preprocessing
+        run: |
+          python preprocessing/automate_Adam_Rifky.py
+
+      # 5. Save cleaned data to GitHub Repository
+      - name: Save cleaned data to repo
+        run: |
+          git config --global user.name "botPreprocess"
+          git config --global user.email "botPreprocess@gmail.com"
+          git add .
+          git commit -m "Automatic Preprocess Data Success! [skip ci]"
+          git push
